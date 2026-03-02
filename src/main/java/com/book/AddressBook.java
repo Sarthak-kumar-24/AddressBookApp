@@ -1,5 +1,8 @@
 package com.book;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -8,16 +11,23 @@ import java.util.Scanner;
  * UC2 : Add a contact
  * UC3 : Edit an existing contact
  * UC4 : Delete a contact using person's name
+ * UC5 : Add multiple contacts using Collection
  */
 public class AddressBook {
 
-	private Contact contact;
+	private List<Contact> contactList;
 
+	 public AddressBook() {
+	        contactList = new ArrayList<>();
+	}
+	 
+	 
 	/**
+	 *  UC2 / UC5:
 	 * Adds a contact to the Address Book. This method is used in UC2.
 	 */
 	public void addContact(Contact contact) {
-		this.contact = contact;
+		contactList.add(contact);
 		System.out.println("Contact added successfully!");
 	}
 
@@ -25,13 +35,17 @@ public class AddressBook {
 	 * Displays the stored contact details. If no contact exists, displays an
 	 * appropriate message.
 	 */
-	public void displayContact() {
-		if (contact == null) {
-			System.out.println("No contact available.");
-			return;
-		}
-		contact.displayContact();
-	}
+    public void displayContacts() {
+        if (contactList.isEmpty()) {
+            System.out.println("Address Book is empty.");
+            return;
+        }
+
+        for (Contact contact : contactList) {
+            contact.displayContact();
+            System.out.println();
+        }
+    }
 
 	/**
 	 * Edits an existing contact using first name as identifier.
@@ -41,65 +55,70 @@ public class AddressBook {
 	 * - Allows user to update
 	 * all fields
 	 */
-	public void editContactByName(String firstName) {
+    public void editContactByName(String firstName) {
 
-		if (contact == null) {
-			System.out.println("No contact to edit.");
-			return;
-		}
+        Scanner scanner = new Scanner(System.in);
+        boolean isFound = false;
 
-		if (!contact.getFirstName().equalsIgnoreCase(firstName)) {
-			System.out.println("Contact not found.");
-			return;
-		}
+        for (Contact contact : contactList) {
+            if (contact.getFirstName().equalsIgnoreCase(firstName)) {
 
-		Scanner scanner = new Scanner(System.in);
+                System.out.println("Editing contact for: " + firstName);
 
-		System.out.println("Editing contact for: " + firstName);
+                System.out.print("Enter new Last Name: ");
+                contact.setLastName(scanner.nextLine());
 
-		System.out.print("Enter new Last Name: ");
-		contact.setLastName(scanner.nextLine());
+                System.out.print("Enter new Address: ");
+                contact.setAddress(scanner.nextLine());
 
-		System.out.print("Enter new Address: ");
-		contact.setAddress(scanner.nextLine());
+                System.out.print("Enter new City: ");
+                contact.setCity(scanner.nextLine());
 
-		System.out.print("Enter new City: ");
-		contact.setCity(scanner.nextLine());
+                System.out.print("Enter new State: ");
+                contact.setState(scanner.nextLine());
 
-		System.out.print("Enter new State: ");
-		contact.setState(scanner.nextLine());
+                System.out.print("Enter new Zip: ");
+                contact.setZip(scanner.nextLine());
 
-		System.out.print("Enter new Zip: ");
-		contact.setZip(scanner.nextLine());
+                System.out.print("Enter new Phone Number: ");
+                contact.setPhoneNumber(scanner.nextLine());
 
-		System.out.print("Enter new Phone Number: ");
-		contact.setPhoneNumber(scanner.nextLine());
+                System.out.print("Enter new Email: ");
+                contact.setEmail(scanner.nextLine());
 
-		System.out.print("Enter new Email: ");
-		contact.setEmail(scanner.nextLine());
-		
-		scanner.close();
+                System.out.println("Contact updated successfully!");
+                isFound = true;
+                break;
+                
+            }
+            scanner.close();
+        }
 
-		System.out.println("Contact updated successfully!");
-	}
-	
-	  /**
-     * UC4: Deletes an existing contact using first name.
-     *
-     * If the name matches, the contact is removed
-     * by setting reference to null.
+        if (!isFound) {
+            System.out.println("Contact not found.");
+        }
+    }
+
+    /**
+     * UC4:
+     * Deletes a contact using first name.
      */
     public void deleteContactByName(String firstName) {
 
-        if (contact == null) {
-            System.out.println("No contact to delete.");
-            return;
+        Iterator<Contact> iterator = contactList.iterator();
+        boolean isFound = false;
+
+        while (iterator.hasNext()) {
+            Contact contact = iterator.next();
+            if (contact.getFirstName().equalsIgnoreCase(firstName)) {
+                iterator.remove();
+                System.out.println("Contact deleted successfully!");
+                isFound = true;
+                break;
+            }
         }
 
-        if (contact.getFirstName().equalsIgnoreCase(firstName)) {
-            contact = null;
-            System.out.println("Contact deleted successfully!");
-        } else {
+        if (!isFound) {
             System.out.println("Contact not found.");
         }
     }
