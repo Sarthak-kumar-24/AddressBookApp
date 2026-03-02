@@ -1,7 +1,9 @@
 package com;
 
-
 import java.util.Scanner;
+
+import com.book.AddressBook;
+import com.book.Contact;
 
 public class AddressBookMain {
 
@@ -10,6 +12,8 @@ public class AddressBookMain {
 		System.out.println("Welcome to Address Book Program");
 
 		Scanner scanner = new Scanner(System.in);
+
+		AddressBook addressBook = new AddressBook();
 
 		System.out.print("Enter First Name: ");
 		String firstName = scanner.nextLine();
@@ -36,6 +40,11 @@ public class AddressBookMain {
 		String email = scanner.nextLine();
 
 		Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+
+		addressBook.addContact(contact);
+
+		System.out.println("\nContacts in Address Book:");
+		addressBook.displayContacts();
 
 		contact.displayContact();
 
