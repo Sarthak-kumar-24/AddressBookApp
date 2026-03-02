@@ -43,6 +43,8 @@ public class AddressBookMain {
             System.out.println("4. Edit Contact");
             System.out.println("5. Delete Contact");
             System.out.println("6. Display Contacts");
+            System.out.println("7. Search Person by City");
+            System.out.println("8. Search Person by State");
             System.out.println("0. Exit");
 
             System.out.print("Enter your choice: ");
@@ -138,6 +140,33 @@ public class AddressBookMain {
                     break;
                 }
                 currentAddressBook.displayContacts();
+                break;
+                
+            case 7:
+                System.out.print("Enter City to search: ");
+                String searchCity = scanner.nextLine();
+
+                addressBookMap.values().stream()              
+                    .flatMap(book -> book.getContacts().stream()) 
+                    .filter(contact -> contact.getCity()
+                        .equalsIgnoreCase(searchCity))
+                    .forEach(contact -> {
+                        contact.displayContact();
+                        System.out.println();
+                    });
+                break;
+                
+            case 8:
+                System.out.print("Enter State to search: ");
+                String searchState = scanner.nextLine();
+
+                addressBookMap.values().stream()
+                    .flatMap(book -> book.getContacts().stream())
+                    .filter(contact -> contact.getState().equalsIgnoreCase(searchState))
+                    .forEach(contact -> {
+                        contact.displayContact();
+                        System.out.println();
+                    });
                 break;
 
             case 0:
