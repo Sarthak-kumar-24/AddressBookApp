@@ -12,6 +12,7 @@ import java.util.Scanner;
  * UC3 : Edit an existing contact
  * UC4 : Delete a contact using person's name
  * UC5 : Add multiple contacts using Collection
+ * UC7: Prevents duplicate contact entry using Streams.
  */
 public class AddressBook {
 
@@ -23,12 +24,20 @@ public class AddressBook {
 	 
 	 
 	/**
-	 *  UC2 / UC5:
-	 * Adds a contact to the Address Book. This method is used in UC2.
+	 * UC7
+	 * Adds contact only if duplicate does NOT exist.
 	 */
-	public void addContact(Contact contact) {
-		contactList.add(contact);
-		System.out.println("Contact added successfully!");
+	public void addContact(Contact newContact) {
+	     boolean isDuplicate = contactList.stream()
+	                .anyMatch(existingContact -> existingContact.equals(newContact));
+
+	        if (isDuplicate) {
+	            System.out.println("Duplicate contact found! Contact not added.");
+	            return;
+	        }
+
+	        contactList.add(newContact);
+	        System.out.println("Contact added successfully!");
 	}
 
 	/**
@@ -55,10 +64,10 @@ public class AddressBook {
 	 * - Allows user to update
 	 * all fields
 	 */
-    public void editContactByName(String firstName) {
+    public void editContactByName(String firstName, Scanner scanner) {
 
-        Scanner scanner = new Scanner(System.in);
-        boolean isFound = false;
+        
+        
 
         for (Contact contact : contactList) {
             if (contact.getFirstName().equalsIgnoreCase(firstName)) {
@@ -87,16 +96,13 @@ public class AddressBook {
                 contact.setEmail(scanner.nextLine());
 
                 System.out.println("Contact updated successfully!");
-                isFound = true;
-                break;
+                
+                return;
                 
             }
-            scanner.close();
+            
         }
-
-        if (!isFound) {
             System.out.println("Contact not found.");
-        }
     }
 
     /**
