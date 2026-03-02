@@ -5,6 +5,16 @@ import java.util.Scanner;
 import com.book.AddressBook;
 import com.book.Contact;
 
+
+/**
+ * AddressBookMain is the entry point of the Address Book application.
+ * 
+ * Responsibilities:
+ * - Display welcome message (UC1)
+ * - Take user input via console
+ * - Create Contact object
+ * - Invoke AddressBook methods (UC2, UC3)
+ */
 public class AddressBookMain {
 
 	public static void main(String[] args) {
@@ -43,10 +53,14 @@ public class AddressBookMain {
 
 		addressBook.addContact(contact);
 
-		System.out.println("\nContacts in Address Book:");
-		addressBook.displayContacts();
+		// UC-3: Edit contact
+		System.out.print("\nEnter First Name to edit contact: ");
+		String editName = scanner.nextLine();
 
-		contact.displayContact();
+		addressBook.editContactByName(editName);
+
+		System.out.println("\nUpdated Contact:");
+		addressBook.displayContact();
 
 		scanner.close();
 	}
