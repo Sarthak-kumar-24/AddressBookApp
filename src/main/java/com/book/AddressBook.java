@@ -3,15 +3,11 @@ package com.book;
 import java.util.Scanner;
 
 /**
- * AddressBook class manages Contact objects.
- * 
- * Responsibilities: 
- * - Store a contact 
- * - Add a new contact (UC2) 
- * - Edit an  existing contact using name (UC3) 
- * - Display contact details
- * 
- * This class separates business logic from the main class.
+ * AddressBook class manages operations related to Contact.
+ *
+ * UC2 : Add a contact
+ * UC3 : Edit an existing contact
+ * UC4 : Delete a contact using person's name
  */
 public class AddressBook {
 
@@ -81,7 +77,30 @@ public class AddressBook {
 
 		System.out.print("Enter new Email: ");
 		contact.setEmail(scanner.nextLine());
+		
+		scanner.close();
 
 		System.out.println("Contact updated successfully!");
 	}
+	
+	  /**
+     * UC4: Deletes an existing contact using first name.
+     *
+     * If the name matches, the contact is removed
+     * by setting reference to null.
+     */
+    public void deleteContactByName(String firstName) {
+
+        if (contact == null) {
+            System.out.println("No contact to delete.");
+            return;
+        }
+
+        if (contact.getFirstName().equalsIgnoreCase(firstName)) {
+            contact = null;
+            System.out.println("Contact deleted successfully!");
+        } else {
+            System.out.println("Contact not found.");
+        }
+    }
 }
