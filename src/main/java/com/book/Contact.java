@@ -1,5 +1,7 @@
 package com.book;
 
+import java.util.Objects;
+
 /**
  * Contact class represents a single person in the Address Book.
  * 
@@ -8,6 +10,7 @@ package com.book;
  * 
  * This class is used across multiple use cases (UC1, UC2, UC3) as the core data
  * model.
+ * UC7: Overrides equals() to prevent duplicate entries.
  */
 public class Contact {
 
@@ -66,6 +69,34 @@ public class Contact {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+    /**
+     * UC7:
+     * Two contacts are considered equal if
+     * they have the same first name and last name.
+     */
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj)
+            return true;
+
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
+        Contact contact = (Contact) obj;
+
+        return firstName.equalsIgnoreCase(contact.firstName)
+                && lastName.equalsIgnoreCase(contact.lastName);
+    }
+    
+    /**
+     * hashCode overridden to maintain contract with equals().
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName.toLowerCase(), lastName.toLowerCase());
+    }
 
 	/**
 	 * Displays all contact details in a readable format. Used after adding or
