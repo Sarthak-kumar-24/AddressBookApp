@@ -120,7 +120,7 @@ public class AddressBookMain {
                     break;
                 }
                 System.out.print("Enter First Name to edit: ");
-                currentAddressBook.editContactByName(scanner.nextLine());
+                currentAddressBook.editContactByName(scanner.nextLine(), scanner);
                 break;
 
             case 5:
