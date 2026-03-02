@@ -39,6 +39,11 @@ public class AddressBook {
 	        contactList.add(newContact);
 	        System.out.println("Contact added successfully!");
 	}
+	
+	
+	public List<Contact> getContacts() {
+	    return contactList;
+	}
 
 	/**
 	 * Displays the stored contact details. If no contact exists, displays an
