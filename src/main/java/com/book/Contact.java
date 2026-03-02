@@ -1,7 +1,14 @@
 package com.book;
 
-
-
+/**
+ * Contact class represents a single person in the Address Book.
+ * 
+ * It stores personal details such as name, address, city, state, zip, phone
+ * number, and email.
+ * 
+ * This class is used across multiple use cases (UC1, UC2, UC3) as the core data
+ * model.
+ */
 public class Contact {
 
 	private String firstName;
@@ -26,6 +33,44 @@ public class Contact {
 		this.email = email;
 	}
 
+	// getters
+	public String getFirstName() {
+		return firstName;
+	}
+
+	// setters (needed for UC-3)
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * Displays all contact details in a readable format. Used after adding or
+	 * editing a contact.
+	 */
 	public void displayContact() {
 		System.out.println("----- Contact Details -----");
 		System.out.println("Name        : " + firstName + " " + lastName);
