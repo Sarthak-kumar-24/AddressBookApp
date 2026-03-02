@@ -13,6 +13,7 @@ import com.book.Contact;
  * UC2 : Add a contact
  * UC3 : Edit an existing contact
  * UC4 : Delete a contact
+ * UC5 : Add multiple contacts using Collection
  */
 public class AddressBookMain {
 
@@ -42,7 +43,7 @@ public class AddressBookMain {
             switch (choice) {
 
                 case 1:
-                    // UC2: Add contact
+                	// UC5: Add multiple contacts (one at a time)
                     System.out.print("Enter First Name: ");
                     String firstName = scanner.nextLine();
 
@@ -90,7 +91,7 @@ public class AddressBookMain {
 
                 case 4:
                     // Display contact
-                    addressBook.displayContact();
+                    addressBook.displayContacts();
                     break;
 
                 case 0:
