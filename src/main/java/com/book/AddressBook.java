@@ -1,30 +1,87 @@
 package com.book;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
+/**
+ * AddressBook class manages Contact objects.
+ * 
+ * Responsibilities: 
+ * - Store a contact 
+ * - Add a new contact (UC2) 
+ * - Edit an  existing contact using name (UC3) 
+ * - Display contact details
+ * 
+ * This class separates business logic from the main class.
+ */
 public class AddressBook {
 
-	private List<Contact> contactList;
+	private Contact contact;
 
-	public AddressBook() {
-		contactList = new ArrayList<>();
-	}
-
+	/**
+	 * Adds a contact to the Address Book. This method is used in UC2.
+	 */
 	public void addContact(Contact contact) {
-		contactList.add(contact);
+		this.contact = contact;
 		System.out.println("Contact added successfully!");
 	}
 
-	public void displayContacts() {
-		if (contactList.isEmpty()) {
-			System.out.println("Address Book is empty.");
+	/**
+	 * Displays the stored contact details. If no contact exists, displays an
+	 * appropriate message.
+	 */
+	public void displayContact() {
+		if (contact == null) {
+			System.out.println("No contact available.");
+			return;
+		}
+		contact.displayContact();
+	}
+
+	/**
+	 * Edits an existing contact using first name as identifier.
+	 * 
+	 * UC3 functionality 
+	 * - Searches for the contact by name 
+	 * - Allows user to update
+	 * all fields
+	 */
+	public void editContactByName(String firstName) {
+
+		if (contact == null) {
+			System.out.println("No contact to edit.");
 			return;
 		}
 
-		for (Contact contact : contactList) {
-			contact.displayContact();
-			System.out.println();
+		if (!contact.getFirstName().equalsIgnoreCase(firstName)) {
+			System.out.println("Contact not found.");
+			return;
 		}
+
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("Editing contact for: " + firstName);
+
+		System.out.print("Enter new Last Name: ");
+		contact.setLastName(scanner.nextLine());
+
+		System.out.print("Enter new Address: ");
+		contact.setAddress(scanner.nextLine());
+
+		System.out.print("Enter new City: ");
+		contact.setCity(scanner.nextLine());
+
+		System.out.print("Enter new State: ");
+		contact.setState(scanner.nextLine());
+
+		System.out.print("Enter new Zip: ");
+		contact.setZip(scanner.nextLine());
+
+		System.out.print("Enter new Phone Number: ");
+		contact.setPhoneNumber(scanner.nextLine());
+
+		System.out.print("Enter new Email: ");
+		contact.setEmail(scanner.nextLine());
+
+		System.out.println("Contact updated successfully!");
 	}
 }
