@@ -36,10 +36,7 @@ public class Contact {
 		this.email = email;
 	}
 
-	// getters
-	public String getFirstName() {
-		return firstName;
-	}
+	
 
 	// setters (needed for UC-3)
 	public void setLastName(String lastName) {
@@ -68,6 +65,23 @@ public class Contact {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getCity() {
+	    return city;
+	}
+
+	public String getState() {
+	    return state;
+	}
+
+	// getters
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+	    return lastName;
 	}
 	
     /**
