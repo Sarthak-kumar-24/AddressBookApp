@@ -62,6 +62,8 @@ public class AddressBook {
 	public List<Contact> getContacts() {
 	    return contactList;
 	}
+	
+
 
 	/**
 	 * Displays the stored contact details. If no contact exists, displays an
@@ -233,4 +235,6 @@ public class AddressBook {
                 .sorted(Comparator.comparing(Contact::getZip))
                 .forEach(System.out::println);
     }
+    
+    
 }
