@@ -45,6 +45,8 @@ public class AddressBookMain {
             System.out.println("6. Display Contacts");
             System.out.println("7. Search Person by City");
             System.out.println("8. Search Person by State");
+            System.out.println("9. View Persons by City");
+            System.out.println("10. View Persons by State");
             System.out.println("0. Exit");
 
             System.out.print("Enter your choice: ");
@@ -169,6 +171,25 @@ public class AddressBookMain {
                     });
                 break;
 
+            case 9:
+                if (currentAddressBook == null) {
+                    System.out.println("Select an Address Book first!");
+                    break;
+                }
+
+                System.out.print("Enter City: ");
+                currentAddressBook.viewPersonsByCity(scanner.nextLine());
+                break;
+                
+            case 10:
+                if (currentAddressBook == null) {
+                    System.out.println("Select an Address Book first!");
+                    break;
+                }
+
+                System.out.print("Enter State: ");
+                currentAddressBook.viewPersonsByState(scanner.nextLine());
+                break;
             case 0:
                 System.out.println("Exiting Address Book System...");
                 break;
