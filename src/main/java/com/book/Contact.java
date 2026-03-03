@@ -126,4 +126,14 @@ public class Contact {
 		System.out.println("Phone No.   : " + phoneNumber);
 		System.out.println("Email       : " + email);
 	}
+	@Override
+	public String toString() {
+	    return "Name: " + firstName + " " + lastName +
+	            ", Address: " + address +
+	            ", City: " + city +
+	            ", State: " + state +
+	            ", Zip: " + zip +
+	            ", Phone: " + phoneNumber +
+	            ", Email: " + email;
+	}
 }
