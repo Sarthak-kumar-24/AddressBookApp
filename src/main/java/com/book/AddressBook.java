@@ -1,8 +1,10 @@
 package com.book;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -17,9 +19,13 @@ import java.util.Scanner;
 public class AddressBook {
 
 	private List<Contact> contactList;
+	private Map<String, List<Contact>> cityMap;
+	private Map<String, List<Contact>> stateMap;
 
 	 public AddressBook() {
 	        contactList = new ArrayList<>();
+	        cityMap = new HashMap<>();
+	        stateMap = new HashMap<>();
 	}
 	 
 	 
@@ -37,6 +43,13 @@ public class AddressBook {
 	        }
 
 	        contactList.add(newContact);
+	        // UC9: Add to City Map
+	        cityMap.computeIfAbsent(newContact.getCity(), k -> new ArrayList<>())
+	                .add(newContact);
+
+	        // UC9: Add to State Map
+	        stateMap.computeIfAbsent(newContact.getState(), k -> new ArrayList<>())
+	                .add(newContact);
 	        System.out.println("Contact added successfully!");
 	}
 	
@@ -108,6 +121,35 @@ public class AddressBook {
             
         }
             System.out.println("Contact not found.");
+    }
+    
+    public void viewPersonsByCity(String city) {
+
+        List<Contact> persons = cityMap.get(city);
+
+        if (persons == null || persons.isEmpty()) {
+            System.out.println("No persons found in city: " + city);
+            return;
+        }
+
+        persons.forEach(contact -> {
+            contact.displayContact();
+            System.out.println();
+        });
+    }
+    public void viewPersonsByState(String state) {
+
+        List<Contact> persons = stateMap.get(state);
+
+        if (persons == null || persons.isEmpty()) {
+            System.out.println("No persons found in state: " + state);
+            return;
+        }
+
+        persons.forEach(contact -> {
+            contact.displayContact();
+            System.out.println();
+        });
     }
 
     /**
