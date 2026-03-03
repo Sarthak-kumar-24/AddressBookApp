@@ -83,6 +83,9 @@ public class Contact {
 	public String getLastName() {
 	    return lastName;
 	}
+	public String getZip() {
+	    return zip;
+	}
 	
     /**
      * UC7:
