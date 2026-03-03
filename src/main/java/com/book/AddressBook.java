@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
  * UC7: Prevents duplicate contact entry using Streams.
  * UC10 : Counts number of contacts grouped by city.
  * UC11 : Sort names alphabetically
+ * UC12 : Sort by City, OR State, OR Zip
  */
 public class AddressBook {
 
@@ -208,6 +209,28 @@ public class AddressBook {
         contactList.stream()
                 .sorted(Comparator.comparing(Contact::getFirstName)
                         .thenComparing(Contact::getLastName))
+                .forEach(System.out::println);
+    }
+    public void sortContactsByCity() {
+
+        contactList.stream()
+                .sorted(Comparator.comparing(Contact::getCity)
+                        .thenComparing(Contact::getFirstName))
+                .forEach(System.out::println);
+    }
+    
+    public void sortContactsByState() {
+
+        contactList.stream()
+                .sorted(Comparator.comparing(Contact::getState)
+                        .thenComparing(Contact::getFirstName))
+                .forEach(System.out::println);
+    }
+    
+    public void sortContactsByZip() {
+
+        contactList.stream()
+                .sorted(Comparator.comparing(Contact::getZip))
                 .forEach(System.out::println);
     }
 }
