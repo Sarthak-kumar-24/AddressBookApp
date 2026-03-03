@@ -74,6 +74,9 @@ public class Contact {
 	public String getState() {
 	    return state;
 	}
+	public String getAddress() { 
+		return address; 
+	}
 
 	// getters
 	public String getFirstName() {
@@ -85,6 +88,12 @@ public class Contact {
 	}
 	public String getZip() {
 	    return zip;
+	}
+	public String getPhoneNumber() { 
+		return phoneNumber; 
+	}
+	public String getEmail() { 
+		return email; 
 	}
 	
     /**
