@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.book.AddressBook;
+import com.book.AddressBookFileIO;
 import com.book.Contact;
 
 /**
@@ -31,6 +32,7 @@ public class AddressBookMain {
 
         // UC6: Dictionary to store AddressBookName -> AddressBook
         Map<String, AddressBook> addressBookMap = new HashMap<>();
+        AddressBookFileIO fileService = new AddressBookFileIO();
 
         AddressBook currentAddressBook = null;
         int choice;
@@ -53,6 +55,8 @@ public class AddressBookMain {
             System.out.println("14. Sort Contacts by City");
             System.out.println("15. Sort Contacts by State");
             System.out.println("16. Sort Contacts by Zip");
+            System.out.println("17. Write Contacts to File");
+            System.out.println("18. Read Contacts from File");
             System.out.println("0. Exit");
 
             System.out.print("Enter your choice: ");
@@ -237,6 +241,22 @@ public class AddressBookMain {
                     break;
                 }
                 currentAddressBook.sortContactsByZip();
+                break;
+            case 17:
+                if (currentAddressBook == null) {
+                    System.out.println("Select an Address Book first!");
+                    break;
+                }
+                System.out.print("Enter file name: ");
+                fileService.writeToFile(scanner.nextLine(), currentAddressBook.getContacts());
+                break;
+            case 18:
+                if (currentAddressBook == null) {
+                    System.out.println("Select an Address Book first!");
+                    break;
+                }
+                System.out.print("Enter file name: ");
+                fileService.readFromFile(scanner.nextLine(), currentAddressBook.getContacts());
                 break;
             case 0:
                 System.out.println("Exiting Address Book System...");
