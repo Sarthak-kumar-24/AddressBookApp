@@ -1,6 +1,7 @@
 package com.book;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
  * UC5 : Add multiple contacts using Collection
  * UC7: Prevents duplicate contact entry using Streams.
  * UC10 : Counts number of contacts grouped by city.
+ * UC11 : Sort names alphabetically
  */
 public class AddressBook {
 
@@ -198,5 +200,14 @@ public class AddressBook {
 
         stateCountMap.forEach((state, count) ->
                 System.out.println("State: " + state + " | Count: " + count));
+    }
+    
+    
+    public void sortContactsByName() {
+
+        contactList.stream()
+                .sorted(Comparator.comparing(Contact::getFirstName)
+                        .thenComparing(Contact::getLastName))
+                .forEach(System.out::println);
     }
 }
