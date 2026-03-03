@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.book.AddressBook;
+import com.book.AddressBookCSVService;
 import com.book.AddressBookFileIO;
 import com.book.Contact;
 
@@ -33,6 +34,7 @@ public class AddressBookMain {
         // UC6: Dictionary to store AddressBookName -> AddressBook
         Map<String, AddressBook> addressBookMap = new HashMap<>();
         AddressBookFileIO fileService = new AddressBookFileIO();
+        AddressBookCSVService csvService = new AddressBookCSVService();
 
         AddressBook currentAddressBook = null;
         int choice;
@@ -57,6 +59,8 @@ public class AddressBookMain {
             System.out.println("16. Sort Contacts by Zip");
             System.out.println("17. Write Contacts to File");
             System.out.println("18. Read Contacts from File");
+            System.out.println("19. Write Contacts to CSV");
+            System.out.println("20. Read Contacts from CSV");
             System.out.println("0. Exit");
 
             System.out.print("Enter your choice: ");
@@ -257,6 +261,24 @@ public class AddressBookMain {
                 }
                 System.out.print("Enter file name: ");
                 fileService.readFromFile(scanner.nextLine(), currentAddressBook.getContacts());
+                break;
+            case 19:
+                if (currentAddressBook == null) {
+                    System.out.println("Select an Address Book first!");
+                    break;
+                }
+
+                System.out.print("Enter CSV file name (example: contacts.csv): ");
+                csvService.writeToCSV(scanner.nextLine(), currentAddressBook.getContacts());
+                break;
+            case 20:
+                if (currentAddressBook == null) {
+                    System.out.println("Select an Address Book first!");
+                    break;
+                }
+
+                System.out.print("Enter CSV file name to read: ");
+                csvService.readFromCSV(scanner.nextLine(), currentAddressBook.getContacts());
                 break;
             case 0:
                 System.out.println("Exiting Address Book System...");
