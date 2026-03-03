@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * AddressBook class manages operations related to Contact.
@@ -15,6 +16,7 @@ import java.util.Scanner;
  * UC4 : Delete a contact using person's name
  * UC5 : Add multiple contacts using Collection
  * UC7: Prevents duplicate contact entry using Streams.
+ * UC10 : Counts number of contacts grouped by city.
  */
 public class AddressBook {
 
@@ -174,5 +176,27 @@ public class AddressBook {
         if (!isFound) {
             System.out.println("Contact not found.");
         }
+    }
+    public void countByCity() {
+
+        Map<String, Long> cityCountMap = contactList.stream()
+                .collect(Collectors.groupingBy(
+                        Contact::getCity,
+                        Collectors.counting()
+                ));
+
+        cityCountMap.forEach((city, count) ->
+                System.out.println("City: " + city + " | Count: " + count));
+    }
+    public void countByState() {
+
+        Map<String, Long> stateCountMap = contactList.stream()
+                .collect(Collectors.groupingBy(
+                        Contact::getState,
+                        Collectors.counting()
+                ));
+
+        stateCountMap.forEach((state, count) ->
+                System.out.println("State: " + state + " | Count: " + count));
     }
 }
