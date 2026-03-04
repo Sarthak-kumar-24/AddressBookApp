@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.book.AddressBook;
 import com.book.AddressBookCSVService;
 import com.book.AddressBookFileIO;
+import com.book.AddressBookJSONService;
 import com.book.Contact;
 
 /**
@@ -35,7 +36,8 @@ public class AddressBookMain {
         Map<String, AddressBook> addressBookMap = new HashMap<>();
         AddressBookFileIO fileService = new AddressBookFileIO();
         AddressBookCSVService csvService = new AddressBookCSVService();
-
+        AddressBookJSONService jsonService = new AddressBookJSONService();
+        
         AddressBook currentAddressBook = null;
         int choice;
 
@@ -61,6 +63,8 @@ public class AddressBookMain {
             System.out.println("18. Read Contacts from File");
             System.out.println("19. Write Contacts to CSV");
             System.out.println("20. Read Contacts from CSV");
+            System.out.println("21. Write Contacts to JSON");
+            System.out.println("22. Read Contacts from JSON");
             System.out.println("0. Exit");
 
             System.out.print("Enter your choice: ");
@@ -279,6 +283,24 @@ public class AddressBookMain {
 
                 System.out.print("Enter CSV file name to read: ");
                 csvService.readFromCSV(scanner.nextLine(), currentAddressBook.getContacts());
+                break;
+            case 21:
+                if (currentAddressBook == null) {
+                    System.out.println("Select an Address Book first!");
+                    break;
+                }
+
+                System.out.print("Enter JSON file name (example: contacts.json): ");
+                jsonService.writeToJSON(scanner.nextLine(), currentAddressBook.getContacts());
+                break;
+            case 22:
+                if (currentAddressBook == null) {
+                    System.out.println("Select an Address Book first!");
+                    break;
+                }
+
+                System.out.print("Enter JSON file name to read: ");
+                jsonService.readFromJSON(scanner.nextLine(), currentAddressBook.getContacts());
                 break;
             case 0:
                 System.out.println("Exiting Address Book System...");
