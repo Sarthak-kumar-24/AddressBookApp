@@ -173,4 +173,12 @@ public class ContactController {
     public int countContactsByStateDB(@PathVariable String state) {
         return contactService.countContactsByStateDB(state);
     }
+    
+    @PostMapping("/add-jdbc")
+    public String addContactUsingJDBC(@RequestBody Contact contact) {
+
+        contactService.addContactUsingJDBC(contact);
+
+        return "Contact added successfully using JDBC";
+    }
 }
