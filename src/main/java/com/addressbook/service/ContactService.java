@@ -179,4 +179,21 @@ public class ContactService {
 
         return contactJdbcRepository.findContactsAddedBetween(start, end);
     }
+    
+    
+    /**
+     * UC19
+     * Count contacts by city using DB function
+     */
+    public int countContactsByCityDB(String city) {
+        return contactJdbcRepository.countContactsByCity(city);
+    }
+
+    /**
+     * UC19
+     * Count contacts by state using DB function
+     */
+    public int countContactsByStateDB(String state) {
+        return contactJdbcRepository.countContactsByState(state);
+    }
 }
