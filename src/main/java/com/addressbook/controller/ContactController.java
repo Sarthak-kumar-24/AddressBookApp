@@ -53,9 +53,9 @@ public class ContactController {
      * UC3
      * Edit contact using ID
      */
-    @PutMapping("/edit/{id}")
-    public Contact editContact(@PathVariable Long id, @RequestBody Contact updatedContact) {
-        return contactService.editContact(id, updatedContact);
+    @PutMapping("/update/{id}")
+    public Contact updateContact(@PathVariable Long id, @RequestBody Contact updatedContact) {
+        return contactService.updateContact(id, updatedContact);
     }
 
     /**
