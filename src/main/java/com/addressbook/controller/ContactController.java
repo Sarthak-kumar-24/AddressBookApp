@@ -181,4 +181,14 @@ public class ContactController {
 
         return "Contact added successfully using JDBC";
     }
+    
+    
+    // UC21
+    @PostMapping("/add-multiple")
+    public String addMultipleContacts(@RequestBody List<Contact> contacts) {
+
+        contactService.addMultipleContacts(contacts);
+
+        return "Multiple contacts added successfully";
+    }
 }
