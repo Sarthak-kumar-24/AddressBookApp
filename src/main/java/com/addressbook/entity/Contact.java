@@ -1,5 +1,6 @@
 package com.addressbook.entity;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -8,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 /**
@@ -40,6 +42,8 @@ public class Contact {
 	private String phoneNumber;
 	private String email;
 	
+	 private LocalDate dateAdded; // UC18 specific
+	
 	@ManyToOne
 	@JoinColumn(name = "address_book_id")
 	private AddressBook addressBook;
@@ -62,6 +66,19 @@ public class Contact {
 		this.zip = zip;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+	}
+	
+	@PrePersist
+    public void setDateAdded() {
+        this.dateAdded = LocalDate.now();
+    }
+	
+	public LocalDate getDateAdded() {
+	    return dateAdded;
+	}
+
+	public void setDateAdded(LocalDate dateAdded) {
+	    this.dateAdded = dateAdded;
 	}
 
 	
