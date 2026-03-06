@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.addressbook.entity.Contact;
 import com.addressbook.repository.ContactJdbcRepository;
@@ -195,5 +196,20 @@ public class ContactService {
      */
     public int countContactsByStateDB(String state) {
         return contactJdbcRepository.countContactsByState(state);
+    }
+    
+    
+    /**
+     * UC20
+     * Add contact using JDBC with transaction
+     */
+    @Transactional
+    public void addContactUsingJDBC(Contact contact) {
+
+        int rows = contactJdbcRepository.addContact(contact);
+
+        if(rows == 0) {
+            throw new RuntimeException("Contact insertion failed");
+        }
     }
 }
