@@ -5,6 +5,8 @@ package com.addressbook.service;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -211,5 +213,26 @@ public class ContactService {
         if(rows == 0) {
             throw new RuntimeException("Contact insertion failed");
         }
+    }
+    
+    // UC21
+    public void addMultipleContacts(List<Contact> contacts) {
+
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+
+        for (Contact contact : contacts) {
+
+            executor.submit(() -> {
+
+                System.out.println("Adding contact: " + contact.getFirstName());
+
+                contactJdbcRepository.addContact(contact);
+
+                System.out.println("Added contact: " + contact.getFirstName());
+
+            });
+        }
+
+        executor.shutdown();
     }
 }
