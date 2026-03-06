@@ -36,6 +36,7 @@ public class ContactServiceTest {
     }
 
     /**
+     * UC16
      * Test search by city
      */
     @Test
@@ -51,6 +52,7 @@ public class ContactServiceTest {
     }
 
     /**
+     * UC16
      * Test count by state
      */
     @Test
@@ -63,7 +65,7 @@ public class ContactServiceTest {
         System.out.println("Contacts in MP: " + count);
     }
     
-    
+    // UC17
     @Test
     public void testUpdateContactAndCheckSyncWithDB() {
 
@@ -91,5 +93,28 @@ public class ContactServiceTest {
         assertEquals(savedContact, contactFromDB);
 
         System.out.println("Contact is synced with DB successfully");
+    }
+    
+    
+    // UC19
+    @Test
+    public void testCountContactsByCityDB() {
+
+        int count = contactService.countContactsByCityDB("Bhopal");
+
+        assertTrue(count >= 0);
+
+        System.out.println("Contacts in Bhopal: " + count);
+    }
+    
+    // UC19
+    @Test
+    public void testCountContactsByStateDB() {
+
+        int count = contactService.countContactsByStateDB("MP");
+
+        assertTrue(count >= 0);
+
+        System.out.println("Contacts in MP: " + count);
     }
 }
