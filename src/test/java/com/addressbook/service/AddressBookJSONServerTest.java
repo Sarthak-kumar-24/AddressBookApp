@@ -10,6 +10,14 @@ import com.addressbook.entity.Contact;
 
 import io.restassured.response.Response;
 
+/**
+ * 
+ * UC22 -> GET contacts from JSONServer
+ * UC23 -> POST contacts to JSONServer
+ * UC24 -> UPDATE contacts in JSONServer
+ * 
+ * 
+ */
 public class AddressBookJSONServerTest {
 	@Test
 	public void givenContactsInJSONServer_whenRetrieved_shouldUpdateAddressBook() {
@@ -65,4 +73,54 @@ public class AddressBookJSONServerTest {
 		contacts.forEach(c -> System.out.println(c.getFirstName()));
 	}
 
+	/*
+	 * UC24
+	 * UPDATE contacts
+	 */
+	@Test
+	public void givenContact_whenUpdated_shouldSyncWithJSONServer() {
+
+	    Contact contact = new Contact(
+	            "Sarthak",
+	            "Rathore",
+	            "Arera Colony",
+	            "Bhopal",
+	            "MP",
+	            "462016",
+	            "9999999999",
+	            "sarthak@gmail.com"
+	    );
+
+	    int contactId = 1;
+
+	    Response response =
+	            given()
+	                    .contentType("application/json")
+	                    .body(contact)
+	            .when()
+	                    .put("http://localhost:3000/contacts/" + contactId);
+
+	    response.then().statusCode(200);
+
+	    System.out.println("Contact updated successfully");
+	}
+	
+	
+	/*
+	 * UC24
+	 * method to confirm data was updated.
+	 */
+	@Test
+	public void whenContactRetrieved_shouldReflectUpdatedData() {
+
+	    Response response =
+	            get("http://localhost:3000/contacts/1");
+
+	    response.then().statusCode(200);
+
+	    Contact contact =
+	            response.as(Contact.class);
+
+	    System.out.println("Updated Contact: " + contact.getFirstName());
+	}
 }
