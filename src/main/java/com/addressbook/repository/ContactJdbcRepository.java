@@ -71,4 +71,32 @@ public class ContactJdbcRepository {
 
         return jdbcTemplate.queryForObject(sql, Integer.class, state);
     }
+    
+    
+    /**
+     * UC20
+     * Add contact using JDBC
+     * 
+     * jdbcTemplate.update() is used for INSERT/UPDATE/DELETE queries.
+     */
+    public int addContact(Contact contact) {
+
+        String sql = "INSERT INTO contacts " +
+                "(first_name, last_name, address, city, state, zip, phone_number, email, date_added, address_book_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        return jdbcTemplate.update(
+                sql,
+                contact.getFirstName(),
+                contact.getLastName(),
+                contact.getAddress(),
+                contact.getCity(),
+                contact.getState(),
+                contact.getZip(),
+                contact.getPhoneNumber(),
+                contact.getEmail(),
+                Date.valueOf(LocalDate.now()),
+                contact.getAddressBook().getId()
+        );
+    }
 }
