@@ -126,6 +126,9 @@ public class Contact {
 	public String getEmail() { 
 		return email; 
 	}
+	public Long getId() {
+		return id;
+	}
 	
 	
 	public AddressBook getAddressBook() {
@@ -141,28 +144,34 @@ public class Contact {
      * Two contacts are considered equal if
      * they have the same first name and last name.
      */
-    @Override
-    public boolean equals(Object obj) {
+	@Override
+	public boolean equals(Object obj) {
 
-        if (this == obj)
-            return true;
+	    if (this == obj)
+	        return true;
 
-        if (obj == null || getClass() != obj.getClass())
-            return false;
+	    if (obj == null || getClass() != obj.getClass())
+	        return false;
 
-        Contact contact = (Contact) obj;
+	    Contact contact = (Contact) obj;
 
-        return firstName.equalsIgnoreCase(contact.firstName)
-                && lastName.equalsIgnoreCase(contact.lastName);
-    }
+	    return id.equals(contact.id) &&
+	            firstName.equals(contact.firstName) &&
+	            lastName.equals(contact.lastName) &&
+	            city.equals(contact.city) &&
+	            state.equals(contact.state) &&
+	            zip.equals(contact.zip) &&
+	            phoneNumber.equals(contact.phoneNumber) &&
+	            email.equals(contact.email);
+	}
     
     /**
      * hashCode overridden to maintain contract with equals().
      */
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName.toLowerCase(), lastName.toLowerCase());
-    }
+	@Override
+	public int hashCode() {
+	    return Objects.hash(id, firstName, lastName, city, state, zip, phoneNumber, email);
+	}
 
 	/**
 	 * Displays all contact details in a readable format. Used after adding or
