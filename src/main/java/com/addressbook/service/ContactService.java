@@ -43,24 +43,30 @@ public class ContactService {
     public List<Contact> getAllContacts() {
         return contactRepository.findAll();
     }
+    
+    public Contact getContactById(Long id) {
+
+        return contactRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Contact not found"));
+    }
 
     /**
      * UC3
      * Edit existing contact
      */
-    public Contact editContact(Long id, Contact updatedContact) {
+    public Contact updateContact(Long id, Contact updatedContact) {
 
-        Contact existingContact = contactRepository.findById(id)
+    	Contact existingContact = contactRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Contact not found"));
 
         existingContact.setFirstName(updatedContact.getFirstName());
         existingContact.setLastName(updatedContact.getLastName());
-        existingContact.setAddress(updatedContact.getAddress());
         existingContact.setCity(updatedContact.getCity());
         existingContact.setState(updatedContact.getState());
         existingContact.setZip(updatedContact.getZip());
         existingContact.setPhoneNumber(updatedContact.getPhoneNumber());
         existingContact.setEmail(updatedContact.getEmail());
+        existingContact.setAddress(updatedContact.getAddress());
 
         return contactRepository.save(existingContact);
     }
