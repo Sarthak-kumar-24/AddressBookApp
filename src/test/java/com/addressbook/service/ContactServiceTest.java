@@ -62,4 +62,34 @@ public class ContactServiceTest {
 
         System.out.println("Contacts in MP: " + count);
     }
+    
+    
+    @Test
+    public void testUpdateContactAndCheckSyncWithDB() {
+
+        // Step 1: create contact
+        Contact contact = new Contact();
+        contact.setFirstName("Test");
+        contact.setLastName("User");
+        contact.setCity("Bhopal");
+        contact.setState("MP");
+        contact.setZip("462001");
+        contact.setPhoneNumber("9999999999");
+        contact.setEmail("test@gmail.com");
+
+        Contact savedContact = contactService.addContact(contact);
+
+        // Step 2: update memory object
+        savedContact.setCity("Indore");
+
+        contactService.updateContact(savedContact.getId(), savedContact);
+
+        // Step 3: fetch from DB
+        Contact contactFromDB = contactService.getContactById(savedContact.getId());
+
+        // Step 4: compare memory vs DB
+        assertEquals(savedContact, contactFromDB);
+
+        System.out.println("Contact is synced with DB successfully");
+    }
 }
