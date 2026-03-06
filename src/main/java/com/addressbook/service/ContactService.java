@@ -2,6 +2,7 @@ package com.addressbook.service;
 
 
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.addressbook.entity.Contact;
+import com.addressbook.repository.ContactJdbcRepository;
 import com.addressbook.repository.ContactRepository;
 
 /**
@@ -23,6 +25,9 @@ public class ContactService {
 
     @Autowired
     private ContactRepository contactRepository;
+    
+    @Autowired
+    private ContactJdbcRepository contactJdbcRepository;
 
     /**
      * UC2
@@ -163,5 +168,15 @@ public class ContactService {
         contacts.sort(Comparator.comparing(Contact::getZip));
 
         return contacts;
+    }
+    
+    
+    /**
+     * UC18
+     * Retrieve contacts added between two dates
+     */
+    public List<Contact> getContactsAddedBetween(LocalDate start, LocalDate end) {
+
+        return contactJdbcRepository.findContactsAddedBetween(start, end);
     }
 }
