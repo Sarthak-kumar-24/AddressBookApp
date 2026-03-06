@@ -44,4 +44,31 @@ public class ContactJdbcRepository {
                 }
         );
     }
+    
+    
+    /**
+     * UC19
+     * Count contacts using DB function by city
+     * 
+     * 
+     * queryForObject() is used when the SQL query returns exactly one value.
+     * Integer.class   :  This tells Spring what type the result should be converted into.
+     */
+    public int countContactsByCity(String city) {
+
+        String sql = "SELECT count_contacts_by_city(?)";
+
+        return jdbcTemplate.queryForObject(sql, Integer.class, city);
+    }
+
+    /**
+     * UC19
+     * Count contacts using DB function by state
+     */
+    public int countContactsByState(String state) {
+
+        String sql = "SELECT count_contacts_by_state(?)";
+
+        return jdbcTemplate.queryForObject(sql, Integer.class, state);
+    }
 }
