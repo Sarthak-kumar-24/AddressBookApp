@@ -15,7 +15,7 @@ import io.restassured.response.Response;
  * UC22 -> GET contacts from JSONServer
  * UC23 -> POST contacts to JSONServer
  * UC24 -> UPDATE contacts in JSONServer
- * 
+ * UC25 -> DELETE contact 
  * 
  */
 public class AddressBookJSONServerTest {
@@ -123,4 +123,47 @@ public class AddressBookJSONServerTest {
 
 	    System.out.println("Updated Contact: " + contact.getFirstName());
 	}
+	/*
+	 * UC25
+	 * Delete Contact Test
+	 * 
+	 */
+	
+	@Test
+	public void givenContactId_whenDeleted_shouldRemoveFromJSONServer() {
+
+	    int contactId = 2;
+
+	    Response response =
+	            given()
+	            .when()
+	                    .delete("http://localhost:3000/contacts/" + contactId);
+
+	    response.then().statusCode(200);
+
+	    System.out.println("Contact deleted successfully");
+	}
+	
+	/*
+	 * UC25
+	 * Verify Contact Is Deleted
+	 */
+	@Test
+	public void whenContactsRetrieved_shouldNotContainDeletedContact() {
+
+	    Response response =
+	            get("http://localhost:3000/contacts");
+
+	    response.then().statusCode(200);
+
+	    List<Contact> contacts =
+	            response.jsonPath().getList("", Contact.class);
+
+	    System.out.println("Remaining contacts: " + contacts.size());
+
+	    contacts.forEach(c ->
+	            System.out.println(c.getFirstName()));
+	}
+	
+	
 }
