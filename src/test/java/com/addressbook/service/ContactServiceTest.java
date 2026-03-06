@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.addressbook.entity.Contact;
 
+import io.restassured.response.Response;
+
 @SpringBootTest
 public class ContactServiceTest {
 
@@ -117,4 +119,6 @@ public class ContactServiceTest {
 
         System.out.println("Contacts in MP: " + count);
     }
+    
+    
 }
