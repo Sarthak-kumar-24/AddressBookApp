@@ -156,4 +156,21 @@ public class ContactController {
 
         return contactService.getContactsAddedBetween(start, end);
     }
+    /**
+     * UC19
+     * Count contacts by city using DB function
+     */
+    @GetMapping("/count-db/city/{city}")
+    public int countContactsByCityDB(@PathVariable String city) {
+        return contactService.countContactsByCityDB(city);
+    }
+
+    /**
+     * UC19
+     * Count contacts by state using DB function
+     */
+    @GetMapping("/count-db/state/{state}")
+    public int countContactsByStateDB(@PathVariable String state) {
+        return contactService.countContactsByStateDB(state);
+    }
 }
