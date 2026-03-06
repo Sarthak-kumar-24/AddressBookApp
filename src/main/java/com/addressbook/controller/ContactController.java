@@ -1,5 +1,6 @@
 package com.addressbook.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,5 +139,21 @@ public class ContactController {
     @GetMapping("/sort/zip")
     public List<Contact> sortByZip() {
         return contactService.sortByZip();
+    }
+    
+    
+    /**
+     * UC18
+     * Retrieve contacts added between a date range
+     */
+    @GetMapping("/added-between")
+    public List<Contact> getContactsAddedBetween(
+            @RequestParam String startDate,
+            @RequestParam String endDate) {
+
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+
+        return contactService.getContactsAddedBetween(start, end);
     }
 }
