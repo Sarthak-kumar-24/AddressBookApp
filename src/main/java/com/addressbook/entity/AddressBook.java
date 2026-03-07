@@ -1,10 +1,21 @@
 package com.addressbook.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.List;
 
 @Entity
 @Table(name = "address_books")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = "contacts")
 public class AddressBook {
 
 	@Id
@@ -16,35 +27,4 @@ public class AddressBook {
 	@OneToMany(mappedBy = "addressBook", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Contact> contacts;
 
-	public AddressBook() {
-	}
-
-	public AddressBook(String name) {
-		this.name = name;
-	}
-
-	// getters & setters
-	public Long getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public List<Contact> getContacts() {
-		return contacts;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setContacts(List<Contact> contacts) {
-		this.contacts = contacts;
-	}
 }
