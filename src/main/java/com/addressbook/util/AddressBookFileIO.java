@@ -61,11 +61,17 @@ public class AddressBookFileIO {
 
                 if (data.length == 8) {
 
-                    Contact contact = new Contact(
-                            data[0], data[1], data[2],
-                            data[3], data[4], data[5],
-                            data[6], data[7]
-                    );
+                	// .builder() because in entity class we use @Builder 
+					Contact contact = Contact.builder()
+					        .firstName(data[0])
+					        .lastName(data[1])
+					        .address(data[2])
+					        .city(data[3])
+					        .state(data[4])
+					        .zip(data[5])
+					        .phoneNumber(data[6])
+					        .email(data[7])
+					        .build();
 
                     contactList.add(contact);
                 }
